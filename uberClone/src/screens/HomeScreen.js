@@ -11,7 +11,7 @@ import React from "react";
 import { colors, parameters } from "../global/styles";
 import { Icon } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
-import { filterData } from "../global/data";
+import { filterData, rideData } from "../global/data";
 
 const HomeScreen = () => {
   return (
@@ -69,10 +69,40 @@ const HomeScreen = () => {
           <Text style={styles.text3}>Where to?</Text>
           <View style={styles.view4}>
             <Icon type="material-community" name="clock-time-five"/>
-            <Text>Now</Text>
+            <Text style={{marginLeft:5}}>Now</Text>
             <Icon type="material-icon" name="arrow-drop-down"/>
           </View>
         </View>
+
+        <View style={{height:185}}>
+          <FlatList
+           data={rideData}
+           keyExtractor={(item) => item.id}
+           maxToRenderPerBatch={2}
+           showsVerticalScrollIndicator={false}
+           ListFooterComponent={<View style={styles.view6}>
+             <Text style={{marginLeft:20, marginTop:5}}>See All</Text>
+             <Icon type="ant-design" name="right" style={styles.icon1} size={18}/>
+           </View>}
+           renderItem={({item}) => (
+            <View style={styles.view5}>
+
+              <View style={styles.view6}>
+                <View style={styles.view7}>
+                <Icon type="ebtypo" name="location-pin"/>
+                </View>
+                <View>
+                  <Text style={{fontSize:16, color:colors.black, fontWeight:"500"}}>{item.street}</Text>
+                  <Text style={{color: colors.grey3}}>{item.area}</Text>
+                </View>
+              </View>
+
+              <Icon type="ant-design" name="right" style={styles.icon1} size={18}/>
+            </View>
+           )}
+          />
+        </View>
+
       </ScrollView>
       <StatusBar
         style="light"
