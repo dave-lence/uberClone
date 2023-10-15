@@ -3,9 +3,27 @@
     "name": "uberClone",
     "slug": "uberClone",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
+  },
+  "android": {
+    "package": "com.uberClone",
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyDimDSm1wyTxU9Ju96rY-y8_-8MbeJgpUY"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOACTION",
+        "ACCESS_FINE_LOCATION",
+        "FOREGROUND_SERVICE"
+      ]
+    }
+  },
+  "ios": {
+    "supportsTablet": true,
+    "bundelIdentifier": "com.uberClone",
+    "config": {
+      "googleMapsApiKey": "AIzaSyDimDSm1wyTxU9Ju96rY-y8_-8MbeJgpUY"
+    }
   },
   "name": "uberClone"
 }

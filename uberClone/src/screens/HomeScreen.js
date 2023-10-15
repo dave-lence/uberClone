@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import React from "react";
+import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
 import { colors, parameters } from "../global/styles";
 import { Icon } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
@@ -74,15 +75,15 @@ const HomeScreen = () => {
           </View>
         </View>
 
-        <View style={{height:185}}>
+        <View style={{height:185, paddingTop:10}}>
           <FlatList
            data={rideData}
            keyExtractor={(item) => item.id}
            maxToRenderPerBatch={2}
            showsVerticalScrollIndicator={false}
            ListFooterComponent={<View style={styles.view6}>
-             <Text style={{marginLeft:20, marginTop:5}}>See All</Text>
-             <Icon type="ant-design" name="right" style={styles.icon1} size={18}/>
+             <Text style={{marginLeft:20, marginTop:5, fontSize:16}}>See All</Text>
+             <Icon type="ant-design" name="right" style={styles.icon1} color={colors.grey3} size={18}/>
            </View>}
            renderItem={({item}) => (
             <View style={styles.view5}>
@@ -97,11 +98,20 @@ const HomeScreen = () => {
                 </View>
               </View>
 
-              <Icon type="ant-design" name="right" style={styles.icon1} size={18}/>
+              <Icon type="ant-design" name="right" style={styles.icon1} size={18} color={colors.grey3}/>
             </View>
            )}
           />
         </View>
+
+      <View style={{marginTop:15}}>
+        <Text style={styles.text4}>Around you</Text>
+        <View style={{alignItems:"center", justifyContent:"center"}}>
+          <MapView style={styles.map} provider={PROVIDER_GOOGLE}>
+
+          </MapView>
+        </View>
+      </View>
 
       </ScrollView>
       <StatusBar
@@ -237,6 +247,7 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 0,
     width: SCREEN_WIDTH * 0.92,
+    // width:"90%"
   },
 
   text4: {
