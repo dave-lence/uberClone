@@ -6,15 +6,37 @@ import {
   ScrollView,
   Image,
   FlatList,
+  Alert,
 } from "react-native";
-import React from "react";
-import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
+import React, { useState, useEffect, useRef } from "react";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import * as Location from "expo-location";
 import { colors, parameters } from "../global/styles";
 import { Icon } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
 import { filterData, rideData } from "../global/data";
+import { mapStyle } from "../global/mapStyle";
 
 const HomeScreen = () => {
+  const [location, setLocation] = useState();
+  const [errMsg, setErrMsg] = useState(null);
+  const _mapRef = useRef(1);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrMsg("Permission to access location was denied");
+        Alert.alert(errMsg);
+        return;
+      }
+
+      let { coords } = await Location.getCurrentPositionAsync();
+      setLocation(coords.longitude, coords.latitude);
+      console.log(coords.longitude, coords.latitude);
+    })();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -69,50 +91,79 @@ const HomeScreen = () => {
         <View style={styles.view3}>
           <Text style={styles.text3}>Where to?</Text>
           <View style={styles.view4}>
-            <Icon type="material-community" name="clock-time-five"/>
-            <Text style={{marginLeft:5}}>Now</Text>
-            <Icon type="material-icon" name="arrow-drop-down"/>
+            <Icon type="material-community" name="clock-time-five" />
+            <Text style={{ marginLeft: 5 }}>Now</Text>
+            <Icon type="material-icon" name="arrow-drop-down" />
           </View>
         </View>
 
-        <View style={{height:185, paddingTop:10}}>
+        <View style={{ height: 185, paddingTop: 10 }}>
           <FlatList
-           data={rideData}
-           keyExtractor={(item) => item.id}
-           maxToRenderPerBatch={2}
-           showsVerticalScrollIndicator={false}
-           ListFooterComponent={<View style={styles.view6}>
-             <Text style={{marginLeft:20, marginTop:5, fontSize:16}}>See All</Text>
-             <Icon type="ant-design" name="right" style={styles.icon1} color={colors.grey3} size={18}/>
-           </View>}
-           renderItem={({item}) => (
-            <View style={styles.view5}>
-
+            data={rideData}
+            keyExtractor={(item) => item.id}
+            maxToRenderPerBatch={2}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={
               <View style={styles.view6}>
-                <View style={styles.view7}>
-                <Icon type="ebtypo" name="location-pin"/>
-                </View>
-                <View>
-                  <Text style={{fontSize:16, color:colors.black, fontWeight:"500"}}>{item.street}</Text>
-                  <Text style={{color: colors.grey3}}>{item.area}</Text>
-                </View>
+                <Text style={{ marginLeft: 20, marginTop: 5, fontSize: 16 }}>
+                  See All
+                </Text>
+                <Icon
+                  type="ant-design"
+                  name="right"
+                  style={styles.icon1}
+                  color={colors.grey3}
+                  size={18}
+                />
               </View>
-
-              <Icon type="ant-design" name="right" style={styles.icon1} size={18} color={colors.grey3}/>
-            </View>
-           )}
+            }
+            renderItem={({ item }) => (
+              <View style={styles.view5}>
+                <View style={styles.view6}>
+                  <View style={styles.view7}>
+                    <Icon type="ebtypo" name="location-pin" />
+                  </View>
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: colors.black,
+                        fontWeight: "500",
+                      }}
+                    >
+                      {item.street}
+                    </Text>
+                    <Text style={{ color: colors.grey3 }}>{item.area}</Text>
+                  </View>
+                </View>
+                <Icon
+                  type="ant-design"
+                  name="right"
+                  style={styles.icon1}
+                  size={18}
+                  color={colors.grey3}
+                />
+              </View>
+            )}
           />
         </View>
 
-      <View style={{marginTop:15}}>
-        <Text style={styles.text4}>Around you</Text>
-        <View style={{alignItems:"center", justifyContent:"center"}}>
-          <MapView style={styles.map} provider={PROVIDER_GOOGLE}>
-
-          </MapView>
+        <View style={{ marginTop: 15 }}>
+          <Text style={styles.text4}>Around you</Text>
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <MapView
+              ref={_mapRef}
+              style={styles.map}
+              provider={PROVIDER_GOOGLE}
+              customMapStyle={mapStyle}
+              showsUserLocation={true}
+              followsUserLocation={true}
+              zoomControlEnabled={true}
+              toolbarEnabled={true}
+              rotateEnabled={true}
+            ></MapView>
+          </View>
         </View>
-      </View>
-
       </ScrollView>
       <StatusBar
         style="light"

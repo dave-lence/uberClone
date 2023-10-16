@@ -4,6 +4,7 @@
     "slug": "uberClone",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"]
+    
   },
   "android": {
     "package": "com.uberClone",
