@@ -7,17 +7,19 @@ import {
   Image,
   FlatList,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { colors, parameters } from "../global/styles";
 import { Icon } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
-import { filterData, rideData } from "../global/data";
+import { carsAround, filterData, rideData } from "../global/data";
 import { mapStyle } from "../global/mapStyle";
+//import { Marker } from "react-native-maps";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [location, setLocation] = useState();
   const [errMsg, setErrMsg] = useState(null);
   const _mapRef = useRef(1);
@@ -33,7 +35,7 @@ const HomeScreen = () => {
 
       let { coords } = await Location.getCurrentPositionAsync();
       setLocation(coords.longitude, coords.latitude);
-      console.log(coords.longitude, coords.latitude);
+     // console.log(coords.longitude, coords.latitude);
     })();
   }, []);
 
@@ -49,7 +51,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <ScrollView bounces={false}>
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         <View style={styles.home}>
           <Text style={styles.text1}>Destress your commute</Text>
           <View style={styles.view1}>
@@ -57,9 +59,12 @@ const HomeScreen = () => {
               <Text style={styles.text2}>
                 Read a book... Take a nap. Stare out the window
               </Text>
-              <View style={styles.button1}>
+              <TouchableOpacity
+              onPress={() => navigation.navigate("Request")} 
+              activeOpacity={0.7}
+              style={styles.button1}>
                 <Text style={styles.button1Text}>Ride with Uber</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             <View>
               <Image
@@ -97,24 +102,18 @@ const HomeScreen = () => {
           </View>
         </View>
 
-        <View style={{ height: 185, paddingTop: 10 }}>
+        <View style={{ height: 220,  }}>
           <FlatList
             data={rideData}
             keyExtractor={(item) => item.id}
             maxToRenderPerBatch={2}
             showsVerticalScrollIndicator={false}
-            ListFooterComponent={
-              <View style={styles.view6}>
-                <Text style={{ marginLeft: 20, marginTop: 5, fontSize: 16 }}>
+            ListHeaderComponent={
+              <View style={[styles.view6, {alignSelf:"flex-end", marginRight: 15, marginTop: 20}]}>
+                <Text style={{ fontSize: 16}}>
                   See All
                 </Text>
-                <Icon
-                  type="ant-design"
-                  name="right"
-                  style={styles.icon1}
-                  color={colors.grey3}
-                  size={18}
-                />
+               
               </View>
             }
             renderItem={({ item }) => (
@@ -161,7 +160,18 @@ const HomeScreen = () => {
               zoomControlEnabled={true}
               toolbarEnabled={true}
               rotateEnabled={true}
-            ></MapView>
+              initialRegion={{...carsAround[4], latitudeDelta:0.008, longitudeDelta:0.008}}
+            >
+              {carsAround.map((cars, index) => (
+                <Marker  key={index.toString()}
+                coordinate={cars}
+               
+                >
+                  <Image style={styles.carsAround} source={require("../../assest/carMarker.png")}/>
+                </Marker>
+                
+              ))}
+            </MapView>
           </View>
         </View>
       </ScrollView>

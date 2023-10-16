@@ -3,10 +3,20 @@
     "name": "uberClone",
     "slug": "uberClone",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
-    
+    "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "light",
+    "icon": "./assest/splash.png",
+    "splash": {
+      "image": "./assest/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    }
   },
   "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assest/splash.png",
+      "backgroundColor": "#fff"  
+    },
     "package": "com.uberClone",
     "config": {
       "googleMaps": {
