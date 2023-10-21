@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import * as Location from "expo-location";
 import { mapStyle } from "../global/mapStyle";
 import { colors, parameters } from "../global/styles";
 

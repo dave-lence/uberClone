@@ -1,5 +1,15 @@
+
 {
   "expo": {
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiZGF2ZWxlbmNlIiwiYSI6ImNsbnhrb2g5ZDBnbW8ycW53amMzNjdmNDYifQ.gscvNQmPF5b2tNVTFto0sQ"
+        }
+      ]
+    ],
     "name": "uberClone",
     "slug": "uberClone",
     "version": "1.0.0",
@@ -20,10 +30,10 @@
     "package": "com.uberClone",
     "config": {
       "googleMaps": {
-        "apiKey": "AIzaSyDimDSm1wyTxU9Ju96rY-y8_-8MbeJgpUY"
+        "apiKey": ""
       },
       "permissions": [
-        "ACCESS_COARSE_LOACTION",
+        "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "FOREGROUND_SERVICE"
       ]
@@ -33,7 +43,7 @@
     "supportsTablet": true,
     "bundelIdentifier": "com.uberClone",
     "config": {
-      "googleMapsApiKey": "AIzaSyDimDSm1wyTxU9Ju96rY-y8_-8MbeJgpUY"
+      "googleMapsApiKey": ""
     }
   },
   "name": "uberClone"

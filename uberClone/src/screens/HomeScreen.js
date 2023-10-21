@@ -176,7 +176,7 @@ const HomeScreen = ({navigation}) => {
         </View>
       </ScrollView>
       <StatusBar
-        style="light"
+        style="auto"
         backgroundColor={colors.blue}
         translucent={true}
       />
