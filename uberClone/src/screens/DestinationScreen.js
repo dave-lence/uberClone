@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, {useRef } from "react";
 import { colors, parameters } from "../global/styles";
 import { Icon, Avatar } from "@rneui/base";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_API_KEY } from "@env";
-import Mapbox from '@rnmapbox/maps';
 
-Mapbox.setAccessToken('sk.eyJ1IjoiZGF2ZWxlbmNlIiwiYSI6ImNsbnhrb2g5ZDBnbW8ycW53amMzNjdmNDYifQ.gscvNQmPF5b2tNVTFto0sQ');
 
 const DestinationScreen = ({ navigation }) => {
   const textInput1 = useRef(4);
@@ -55,9 +53,9 @@ const DestinationScreen = ({ navigation }) => {
       <GooglePlacesAutocomplete
         nearbyPlacesAPI="GooglePlacesSearch"
         placeholder="Going to..."
-        listViewDisplayed={true}
+        listViewDisplayed="auto"
         debounce={400}
-        //currentLocation={true}
+       // currentLocation={true}
         ref={textInput2}
         minLength={2}
         enablePoweredByContainer={false}
@@ -137,7 +135,7 @@ const autoComplete = {
   textInput: {
     backgroundColor: colors.grey6,
     height: 50,
-    borderRadius: 5,
+    borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
     fontSize: 15,

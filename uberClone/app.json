@@ -1,21 +1,11 @@
-
 {
   "expo": {
-    "plugins": [
-      [
-        "@rnmapbox/maps",
-        {
-          "RNMapboxMapsImpl": "mapbox",
-          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiZGF2ZWxlbmNlIiwiYSI6ImNsbnhrb2g5ZDBnbW8ycW53amMzNjdmNDYifQ.gscvNQmPF5b2tNVTFto0sQ"
-        }
-      ]
-    ],
     "name": "uberClone",
     "slug": "uberClone",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "light",
-    "icon": "./assest/splash.png",
+    "icon": "./assest/icon.png",
     "splash": {
       "image": "./assest/splash.png",
       "resizeMode": "contain",
@@ -25,12 +15,12 @@
   "android": {
     "adaptiveIcon": {
       "foregroundImage": "./assest/splash.png",
-      "backgroundColor": "#fff"  
+      "backgroundColor": "#fff"
     },
     "package": "com.uberClone",
     "config": {
       "googleMaps": {
-        "apiKey": ""
+        "apiKey": "AIzaSyBQivdVNxU7quHhW_ARw2VuXKmHVwXhNMk"
       },
       "permissions": [
         "ACCESS_COARSE_LOCATION",
@@ -43,7 +33,7 @@
     "supportsTablet": true,
     "bundelIdentifier": "com.uberClone",
     "config": {
-      "googleMapsApiKey": ""
+      "googleMapsApiKey": "AIzaSyBQivdVNxU7quHhW_ARw2VuXKmHVwXhNMk"
     }
   },
   "name": "uberClone"
