@@ -1,2 +1,4 @@
 # uberClone project
-## Setting up developement environment.
+## Setting up the development environment.
+### Creating a new react native project.
+To create a new react native 
