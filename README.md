@@ -1,1 +1,2 @@
-# uberClone
+# uberClone project
+## Setting up developement environment.
